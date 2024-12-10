@@ -11,6 +11,12 @@
         "outDir": "build/",
         "noEmitOnError": true,
         "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+        "*": ["src/*"]
+            },
+        "esModuleInterop": true,
+        "isolatedModules": false
     },
     "include": [
         "src/**/*"
