@@ -5,9 +5,6 @@ import CanvasRenderer from './CanvasRenderer.js';
 import Player from './Player.js';
 
 export default class Level5 extends Level {
-  private currentDialogue: number;
-
-  private keyListener: KeyListener;
 
   private spawnInterval: number | null = null;
 

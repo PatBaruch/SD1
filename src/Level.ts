@@ -60,6 +60,10 @@ export default abstract class Level {
 
   protected score: number;
 
+  protected keyListener: KeyListener;
+
+  protected currentDialogue: number = 0;
+
   public levelTimer: number = 0;
 
   public mrHacker: MrHacker;
@@ -102,6 +106,26 @@ export default abstract class Level {
   }
 
   public abstract nextLevel(): Level | null;
+
+  protected handleDialogues(canvas: HTMLCanvasElement, dialogues: string[]): boolean {
+    if (this.keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+      this.currentDialogue += 1;
+    }
+
+    if (this.currentDialogue < dialogues.length) {
+      const filepath: string = dialogues[this.currentDialogue];
+      CanvasRenderer.drawImage(
+        canvas,
+        CanvasRenderer.loadNewImage(filepath),
+        (canvas.width / 2) - 480,
+        (canvas.height / 2) - 270
+      );
+      return false; // Not done with dialogues
+    }
+
+    return true; // All dialogues shown
+  }
+
 
   /**
    *

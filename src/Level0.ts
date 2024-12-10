@@ -5,10 +5,6 @@ import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 
 export default class Level0 extends Level {
-  private currentDialogue: number;
-
-  private keyListener: KeyListener;
-
   private startScreenSkipped: boolean = false;
 
   public constructor(canvas: HTMLCanvasElement, helth: number, score: number){

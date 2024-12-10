@@ -6,8 +6,6 @@ import CanvasRenderer from './CanvasRenderer.js';
 import Player from './Player.js';
 
 export default class Level2 extends Level {
-  private currentDialogue: number;
-  private keyListener: KeyListener;
   private spawnInterval: number | null = null;
 
   public constructor(canvas: HTMLCanvasElement, health: number, score: number){
@@ -47,25 +45,17 @@ export default class Level2 extends Level {
       '../assets/Dialogue-Level2/Level2-1.png',
     ];
 
-    if (this.keyListener.keyPressed(KeyListener.KEY_SPACE)) {
-      this.currentDialogue += 1;
-    }
-
-    if (this.currentDialogue < dialogues.length) {
-      const filepath: string = dialogues[this.currentDialogue];
-      CanvasRenderer.drawImage(canvas,
-        CanvasRenderer.loadNewImage(filepath),
-        (this.canvas.width / 2) - 480, (this.canvas.height / 2) - 270);
-    } else {
-      // Start the level after the last dialogue
+    if (this.handleDialogues(canvas, dialogues)) {
+      // Only runs if dialogues are finished
       super.render(canvas);
       if (!this.hasStarted) {
         this.startLevel();
         this.hasStarted = true;
       }
-    }
-    if (this.score >= 400 && this.gameItems.length === 0) {
-      document.body.className = 'goNextLevel';
+
+      if (this.score >= 400 && this.gameItems.length === 0) {
+        document.body.className = 'goNextLevel';
+      }
     }
   }
 
